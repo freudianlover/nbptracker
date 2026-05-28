@@ -1,0 +1,332 @@
+{
+  "info": {
+    "_postman_id": "c0bac908-d213-4d34-ba5b-09890f9b2e1c",
+    "name": "exchange_rates_nbp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55152259",
+    "_collection_link": "https://go.postman.co/collection/55152259-c0bac908-d213-4d34-ba5b-09890f9b2e1c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "JPY",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/JPY/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "JPY",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SGD",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/SGD/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "SGD",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PHP",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/PHP/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "PHP",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "MYR",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/MYR/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "MYR",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "WEEKEND_error",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/USD/2025-05-24/?format=json",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "USD",
+            "2025-05-24",
+            ""
+          ],
+          "query": [
+            {
+              "key": "format",
+              "value": "json"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "USD",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/USD/?format=json",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "USD",
+            ""
+          ],
+          "query": [
+            {
+              "key": "format",
+              "value": "json"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EUR",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/EUR/?format=json",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "EUR",
+            ""
+          ],
+          "query": [
+            {
+              "key": "format",
+              "value": "json"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "KRW",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/KRW/?format=json",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "KRW",
+            ""
+          ],
+          "query": [
+            {
+              "key": "format",
+              "value": "json"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TABLE_A",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/tables/A/?format=json",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "tables",
+            "A",
+            ""
+          ],
+          "query": [
+            {
+              "key": "format",
+              "value": "json"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "USD - last 2 rates ",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/USD/last/2/?format=json",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "USD",
+            "last",
+            "2",
+            ""
+          ],
+          "query": [
+            {
+              "key": "format",
+              "value": "json"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EUR - from to format",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.nbp.pl/api/exchangerates/rates/A/EUR/2026-04-01/2026-05-27/?format=json",
+          "protocol": "https",
+          "host": [
+            "api",
+            "nbp",
+            "pl"
+          ],
+          "path": [
+            "api",
+            "exchangerates",
+            "rates",
+            "A",
+            "EUR",
+            "2026-04-01",
+            "2026-05-27",
+            ""
+          ],
+          "query": [
+            {
+              "key": "format",
+              "value": "json"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
