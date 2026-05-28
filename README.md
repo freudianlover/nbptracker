@@ -37,5 +37,5 @@ threshold alerts.
 ## API exploration
 
 ##NBP API requests are documented as a Postman collection in 
-[`docs/nbp_api_postman_collection.json`](docs/exchange_rates_nbp.postman_collection.json). 
+[`HERE`](docs/exchange_rates_nbp.postman_collection.json). 
 Import into Postman to explore endpoints and sample responses.
