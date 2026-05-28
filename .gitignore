@@ -216,3 +216,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local secrets
+*.env.local
+
+# Conda
+.conda/
+
+# IDE
+.vscode/
+.idea/
+
+# Local data
+data/
+*.db
+*.sqlite
