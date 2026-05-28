@@ -33,3 +33,9 @@ threshold alerts.
 ## Quickstart
 
 (coming when Docker setup is done)
+
+## API exploration
+
+##NBP API requests are documented as a Postman collection in 
+[`docs/nbp_api_postman_collection.json`](docs/nbp_api_postman_collection.json). 
+Import into Postman to explore endpoints and sample responses.
