@@ -1,0 +1,12 @@
+{
+  "table": "A",
+  "currency": "jen (Japonia)",
+  "code": "JPY",
+  "rates": [
+    {
+      "no": "104/A/NBP/2026",
+      "effectiveDate": "2026-06-01",
+      "mid": 0.022778
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "table": "A",
+  "currency": "dolar amerykański",
+  "code": "USD",
+  "rates": [
+    {
+      "no": "095/A/NBP/2026",
+      "effectiveDate": "2026-05-19",
+      "mid": 3.6467
+    },
+    {
+      "no": "096/A/NBP/2026",
+      "effectiveDate": "2026-05-20",
+      "mid": 3.6709
+    },
+    {
+      "no": "097/A/NBP/2026",
+      "effectiveDate": "2026-05-21",
+      "mid": 3.6529
+    },
+    {
+      "no": "098/A/NBP/2026",
+      "effectiveDate": "2026-05-22",
+      "mid": 3.6571
+    },
+    {
+      "no": "099/A/NBP/2026",
+      "effectiveDate": "2026-05-25",
+      "mid": 3.6374
+    },
+    {
+      "no": "100/A/NBP/2026",
+      "effectiveDate": "2026-05-26",
+      "mid": 3.6394
+    },
+    {
+      "no": "101/A/NBP/2026",
+      "effectiveDate": "2026-05-27",
+      "mid": 3.6404
+    },
+    {
+      "no": "102/A/NBP/2026",
+      "effectiveDate": "2026-05-28",
+      "mid": 3.6463
+    },
+    {
+      "no": "103/A/NBP/2026",
+      "effectiveDate": "2026-05-29",
+      "mid": 3.6395
+    },
+    {
+      "no": "104/A/NBP/2026",
+      "effectiveDate": "2026-06-01",
+      "mid": 3.6319
+    }
+  ]
+}

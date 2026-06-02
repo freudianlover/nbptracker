@@ -1,0 +1,97 @@
+{
+  "table": "A",
+  "currency": "euro",
+  "code": "EUR",
+  "rates": [
+    {
+      "no": "084/A/NBP/2026",
+      "effectiveDate": "2026-05-04",
+      "mid": 4.2544
+    },
+    {
+      "no": "085/A/NBP/2026",
+      "effectiveDate": "2026-05-05",
+      "mid": 4.2551
+    },
+    {
+      "no": "086/A/NBP/2026",
+      "effectiveDate": "2026-05-06",
+      "mid": 4.2351
+    },
+    {
+      "no": "087/A/NBP/2026",
+      "effectiveDate": "2026-05-07",
+      "mid": 4.2286
+    },
+    {
+      "no": "088/A/NBP/2026",
+      "effectiveDate": "2026-05-08",
+      "mid": 4.2284
+    },
+    {
+      "no": "089/A/NBP/2026",
+      "effectiveDate": "2026-05-11",
+      "mid": 4.2386
+    },
+    {
+      "no": "090/A/NBP/2026",
+      "effectiveDate": "2026-05-12",
+      "mid": 4.2478
+    },
+    {
+      "no": "091/A/NBP/2026",
+      "effectiveDate": "2026-05-13",
+      "mid": 4.2524
+    },
+    {
+      "no": "092/A/NBP/2026",
+      "effectiveDate": "2026-05-14",
+      "mid": 4.2401
+    },
+    {
+      "no": "093/A/NBP/2026",
+      "effectiveDate": "2026-05-15",
+      "mid": 4.2489
+    },
+    {
+      "no": "094/A/NBP/2026",
+      "effectiveDate": "2026-05-18",
+      "mid": 4.2434
+    },
+    {
+      "no": "095/A/NBP/2026",
+      "effectiveDate": "2026-05-19",
+      "mid": 4.2389
+    },
+    {
+      "no": "096/A/NBP/2026",
+      "effectiveDate": "2026-05-20",
+      "mid": 4.2546
+    },
+    {
+      "no": "097/A/NBP/2026",
+      "effectiveDate": "2026-05-21",
+      "mid": 4.246
+    },
+    {
+      "no": "098/A/NBP/2026",
+      "effectiveDate": "2026-05-22",
+      "mid": 4.2453
+    },
+    {
+      "no": "099/A/NBP/2026",
+      "effectiveDate": "2026-05-25",
+      "mid": 4.2352
+    },
+    {
+      "no": "100/A/NBP/2026",
+      "effectiveDate": "2026-05-26",
+      "mid": 4.2352
+    },
+    {
+      "no": "101/A/NBP/2026",
+      "effectiveDate": "2026-05-27",
+      "mid": 4.2393
+    }
+  ]
+}
