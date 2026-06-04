@@ -28,15 +28,15 @@ def test_get_500_api_unavailable_retry(mocker, nbp_client):
 # test2
 
 
-def test_fetch_currency_history_returns_exchange_rates(mocker, nbp_client, nbp_usd_last_10_json):
+def test_fetch_currency_history_returns_exchange_rates(mocker, nbp_client, usd_last_10):
     # Arrange
     mock_response = MagicMock()
     mock_response.status_code = 200
-    mock_response.json.return_value = nbp_usd_last_10_json
+    mock_response.json.return_value = usd_last_10
     mocker.patch.object(nbp_client.session, 'get', return_value=mock_response)
 
     # Act
-    rates = nbp_client.fetch_currency_history("USD", days=10)
+    rates = nbp_client.fetch_currency_history("USD", number_of_days=10)
 
     # Assert
     assert len(rates) == 10
@@ -75,11 +75,11 @@ def test_get_retries_on_network_error_then_raises(mocker, nbp_client):
 
 
 # test5
-def test_fetch_table_a_parses_list_with_single_element(mocker, nbp_client, nbp_table_a_json):
+def test_fetch_table_a_parses_list_with_single_element(mocker, nbp_client, table_a):
     # Arrange
     mock_response = MagicMock()
     mock_response.status_code = 200
-    mock_response.json.return_value = nbp_table_a_json
+    mock_response.json.return_value = table_a
     mocker.patch.object(nbp_client.session, 'get', return_value=mock_response)
 
     # Act
@@ -95,11 +95,11 @@ def test_fetch_table_a_parses_list_with_single_element(mocker, nbp_client, nbp_t
 
 
 # test6
-def test_fetch_table_a_parses_list_with_single_element(mocker, nbp_client, nbp_table_a_json):
+def test_fetch_table_a_parses_list_with_single_element(mocker, nbp_client, table_a):
     # Arrange
     mock_response = MagicMock()
     mock_response.status_code = 200
-    mock_response.json.return_value = nbp_table_a_json
+    mock_response.json.return_value = table_a
     mocker.patch.object(nbp_client.session, 'get', return_value=mock_response)
 
     # Act
