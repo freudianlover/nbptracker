@@ -17,7 +17,7 @@ and interactive visualization.
 
 ## Status
 
-**v1 (in progress, target 2026-06-03)**: NBP API ingestion → PostgreSQL 
+**v1 (in progress, target 2026-06-17)**: NBP API ingestion → PostgreSQL 
 time-series → Streamlit dashboard with multi-currency comparison + 
 threshold alerts.
 
