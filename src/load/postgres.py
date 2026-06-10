@@ -92,13 +92,6 @@ class PostgresLoader:
         Returns:
             (inserted_count, updated_count)
         """
-        # TODO:
-        # 1. Konwertuj rates -> list of tuples (currency_code, effective_date, rate_pln, table_no, datetime.now(timezone.utc))
-        # 2. cursor.execute_values z UPSERT_SQL
-        # 3. results = cursor.fetchall() — list of (True/False) z "inserted" column
-        # 4. inserted = sum(r[0] for r in results); updated = len(results) - inserted
-        # 5. log.info("rates_upserted", inserted=..., updated=..., total=len(rates))
-        # 6. return inserted, updated
 
         current_time = datetime.now(timezone.utc)
 

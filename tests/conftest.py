@@ -77,3 +77,23 @@ def sample_exchange_rates():
             table="A",
         ),
     ]
+
+
+@pytest.fixture
+def clean_db():
+    """
+    Truncate exchange_rates_daily before and after each test.
+    Ensures test isolation: each test starts with clean rates table.
+    """
+    loader = PostgresLoader()
+
+    def _truncate():
+        with loader.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "TRUNCATE TABLE exchange_rates_daily RESTART IDENTITY CASCADE;")
+            conn.commit()
+
+    _truncate()  # before
+    yield
+    _truncate()  # after

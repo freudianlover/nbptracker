@@ -16,7 +16,7 @@ def test_empty_list(mocker, postgres_loader):
     # Assert
     assert inserted == 0
     assert updated == 0
-    # ważne: NIE wywołane dla pustego inputu
+    # not called for empty input
     mock_execute_values.assert_not_called()
 
 
@@ -64,13 +64,6 @@ def test_upsert_mixed_insert_update_counts(postgres_loader, sample_exchange_rate
     assert inserted == 2
     assert updated == 1
     mock_execute_values.assert_called_once()
-
-    # TODO:
-    # 1. Zrób mock_conn i mock_cursor jak wyżej (with context manager)
-    # 2. Mock execute_values żeby zwrócił mixed:
-    #    [(True,), (False,), (True,)]  -- True=inserted, False=updated (xmax=0 logic)
-    # 3. Act: wywołaj upsert_rates
-    # 4. Assert: inserted == 2, updated == 1
 
 
 def test_connection_raises_postgres_error_on_db_down(postgres_loader, mocker):
