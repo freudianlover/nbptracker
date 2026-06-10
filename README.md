@@ -1,6 +1,6 @@
 # nbptracker
 NBP Exchange Rates Tracker with notification system
-# NBPTracker — Polish Exchange Rate Pipeline
+# Polish Exchange Rate Pipeline
 
 A personal data engineering project: automated ingestion of Polish National 
 Bank (NBP) exchange rates with time-series storage, interactive dashboard, 
