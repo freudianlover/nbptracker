@@ -1,0 +1,10 @@
+[theme]
+# Frutiger Aero-inspired light palette (without full glassmorphism)
+primaryColor = "#0099CC"           # cyan-blue (Frutiger Aero core)
+backgroundColor = "#F0F8FF"        # alice blue (sky)
+secondaryBackgroundColor = "#E0F2F7"  # lighter blue
+textColor = "#003D5C"              # deep navy
+font = "sans serif"
+
+[server]
+runOnSave = true                   # auto-reload on file changes
