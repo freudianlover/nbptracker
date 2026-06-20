@@ -19,6 +19,7 @@ import sys
 from datetime import date
 from decimal import Decimal
 from typing import Optional
+from src.notifications.telegram import TelegramNotifier
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -47,6 +48,7 @@ class AlertEvaluator:
     def __init__(self, spam_window_hours: int = 24):
         self.spam_window_hours = spam_window_hours
         self.loader = PostgresLoader()
+        self.notifier = TelegramNotifier()
 
     def get_active_rules(self, conn) -> list[dict]:
         """Fetch all active alert rules."""
@@ -102,7 +104,7 @@ class AlertEvaluator:
         return operator_fn(current_rate, rule["threshold_pln"])
 
     def record_alert(
-        self, conn, rule_id: int, rate: Decimal, effective_date: date
+        self, conn, rule_id: int, rate: Decimal, effective_date: date, rule: Optional[dict] = None
     ) -> None:
         """Insert triggered alert into alerts_sent."""
         with conn.cursor() as cur:
@@ -113,6 +115,82 @@ class AlertEvaluator:
                 """,
                 (rule_id, rate, effective_date),
             )
+            # Send Telegram notification (silent fail if disabled)
+        if rule is not None:
+            message = self._format_telegram_message(rule, rate, effective_date)
+            self.notifier.send(message)
+
+    def _format_telegram_message(self, rule: dict, rate: Decimal, effective_date: date) -> str:
+        """Format alert as Markdown for Telegram."""
+        OPERATOR_SYMBOLS = {"lt": "<", "le": "≤", "gt": ">", "ge": "≥"}
+        op_symbol = OPERATOR_SYMBOLS.get(rule["operator"], rule["operator"])
+        label_part = f"\n_{rule['label']}_" if rule.get("label") else ""
+
+        return (
+            f"🔔 *NBP Alert triggered*\n\n"
+            f"*{rule['currency_code']}* {op_symbol} {float(rule['threshold_pln']):.4f} PLN{label_part}\n\n"
+            f"Current rate: *{float(rate):.4f} PLN*\n"
+            f"Effective date: {effective_date.isoformat()}")
+
+    def evaluate_single_rule(self, rule_id: int) -> dict | None:
+        """
+        Evaluate a single rule by id. Inserts to alerts_sent if triggered.
+
+        Returns:
+            dict with alert info if triggered, None otherwise
+        """
+        with self.loader.connection() as conn:
+            # Fetch the specific rule
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id, currency_code, threshold_pln, operator, label
+                    FROM alert_rules
+                    WHERE id = %s AND active = TRUE;
+                    """,
+                    (rule_id,),
+                )
+                row = cur.fetchone()
+                if not row:
+                    log.warning("rule_not_found_or_inactive", rule_id=rule_id)
+                    return None
+
+                columns = [desc[0] for desc in cur.description]
+                rule = dict(zip(columns, row))
+
+            # Same logic as in run() but for one rule
+            latest = self.get_latest_rate(conn, rule["currency_code"])
+            if latest is None:
+                log.warning("no_rate_data", rule_id=rule_id)
+                return None
+
+            rate, effective_date = latest
+
+            if not self.evaluate_rule(rule, rate):
+                return None
+
+            if self.was_triggered_recently(conn, rule_id):
+                log.info("rule_skipped_cooldown", rule_id=rule_id)
+                return None
+
+            # Trigger!
+            self.record_alert(conn, rule_id, rate, effective_date, rule=rule)
+            log.info(
+                "ALERT_TRIGGERED_INLINE",
+                rule_id=rule_id,
+                label=rule["label"],
+                rate=float(rate),
+            )
+
+            return {
+                "rule_id": rule_id,
+                "currency_code": rule["currency_code"],
+                "operator": rule["operator"],
+                "threshold_pln": rule["threshold_pln"],
+                "label": rule["label"],
+                "rate_at_trigger": rate,
+                "effective_date": effective_date,
+            }
 
     def run(self) -> tuple[int, int]:
         """
@@ -170,7 +248,8 @@ class AlertEvaluator:
                     continue
 
                 # 4. Record alert
-                self.record_alert(conn, rule_id, rate, effective_date)
+                self.record_alert(conn, rule_id, rate,
+                                  effective_date, rule=rule)
                 log.info(
                     "ALERT_TRIGGERED",
                     rule_id=rule_id,
