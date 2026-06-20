@@ -1,0 +1,55 @@
+cat > .dockerignore <<'EOF'
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# Virtual envs
+venv/
+.venv/
+.conda/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Git
+.git/
+.gitignore
+
+# Local data
+data/
+*.db
+*.sqlite
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docs / non-runtime
+docs/
+README.md
+*.md
+TODO.md
+
+# Streamlit
+.streamlit/
+
+# Local env
+.env
+*.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build/cache
+*.tar.gz
+build/
+dist/
+EOF

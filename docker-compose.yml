@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: nbptracker-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-nbptracker}
+      POSTGRES_USER: ${POSTGRES_USER:-nbptracker}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nbptracker}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  scheduler:
+    build: .
+    container_name: nbptracker-scheduler
+    command: python -m src.scheduler.runner
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres   # <- override .env, bo w Dockerze hostname = service name
+      POSTGRES_PORT: 5432
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  dashboard:
+    build: .
+    container_name: nbptracker-dashboard
+    command: streamlit run src/dashboard/app.py --server.address=0.0.0.0 --server.port=8501 --server.headless=true
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    ports:
+      - "8501:8501"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
