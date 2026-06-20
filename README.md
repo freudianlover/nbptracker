@@ -157,7 +157,7 @@ Decimal('0.1') + Decimal('0.2')  # Returns: 0.3
 ![Alerts section](docs/screenshots/rules+alerts.png)
 *Alert builder with active rules and triggered history*
 
-![Telegram notification](docs/screenshots/telegram.jpg)
+![Telegram notification](docs/screenshots/telegram.PNG)
 *Push notification on phone when rule triggers*
 
 
