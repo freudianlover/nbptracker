@@ -1,41 +1,89 @@
-# nbptracker
-NBP Exchange Rates Tracker with notification system
-# Polish Exchange Rate Pipeline
+# 💱 NBPTracker
 
-A personal data engineering project: automated ingestion of Polish National 
-Bank (NBP) exchange rates with time-series storage, interactive dashboard, 
-and threshold-based alerts. Built to monitor PLN exchange rates while 
-planning international travel.
+> Personal data engineering project: automated ingestion of Polish National Bank (NBP) 
+> exchange rates with time-series storage, interactive dashboard, threshold-based alerts, 
+> and push notifications via Telegram.
+
+[![Python](https://img.shields.io/badge/python-3.11-blue.svg)]()
+[![PostgreSQL](https://img.shields.io/badge/postgres-16-336791.svg)]()
+[![Streamlit](https://img.shields.io/badge/streamlit-1.40-FF4B4B.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 
 ## Why this exists
 
-I've been planning a trip to Asia and wanted a simple way to track when 
-key exchange rates (EUR, USD, CNY, JPY) hit favorable levels. I built 
-NBPTracker to demonstrate end-to-end data engineering fundamentals: REST 
-API ingestion, normalized PostgreSQL warehousing, scheduled orchestration, 
-and interactive visualization.
+I'm planning a trip to Asia and wanted a simple way to track when key exchange rates 
+(EUR, USD, CNY, JPY) hit favorable levels. I built NBPTracker to demonstrate 
+end-to-end data engineering fundamentals: REST API ingestion, normalized PostgreSQL 
+warehousing, scheduled orchestration, interactive visualization, and notification 
+infrastructure.
 
-## Status
+## Features
 
-**v1 (in progress, target 2026-06-17)**: NBP API ingestion → PostgreSQL 
-time-series → Streamlit dashboard with multi-currency comparison + 
-threshold alerts.
+- 📥 **Daily ingest** from NBP API (Table A -> 10 tracked currencies)
+- 📊 **Interactive dashboard** with multi-currency chart, KPI cards, top movers
+- 🔔 **Alert system** with threshold-based rules and 24h no-spam cooldown
+- 📱 **Telegram push notifications** when alerts trigger
+- 🐳 **Fully dockerized** -> `make up` and you're running
+- ✅ **14/14 tests passing** (10 unit + 4 integration)
+
+
+## Architecture
+
+```mermaid
+flowchart LR
+    NBP[NBP API<br/>api.nbp.pl] --> Extract[NbpClient<br/>extract layer]
+    Extract --> Models[ExchangeRate<br/>dataclass]
+    Models --> Loader[PostgresLoader<br/>load layer]
+    Loader --> DB[(PostgreSQL<br/>3NF schema)]
+    
+    Scheduler[APScheduler<br/>daily 12:30 UTC] -.triggers.-> Main[main.py<br/>orchestration]
+    Main --> Extract
+    
+    DB --> Queries[queries.py<br/>data access]
+    Queries --> Dashboard[Streamlit<br/>dashboard]
+    
+    DB --> Evaluator[AlertEvaluator<br/>scheduler]
+    Evaluator --> Telegram[TelegramNotifier]
+    Telegram --> Phone[📱 Your phone]
+    
+    Scheduler -.triggers hourly.-> Evaluator
+```
+
 
 ## Tech stack
 
-- Python 3.11 + pandas
-- PostgreSQL 16 (time-series schema with proper indexing)
-- APScheduler (daily refresh at 12:30 after NBP fixing)
-- Streamlit + Plotly (interactive dashboard)
-- Docker + docker-compose
-- pytest (unit tests for API client)
+| Layer | Technology |
+|---|---|
+| **Language** | Python 3.11 |
+| **Database** | PostgreSQL 16 (3NF schema, time-series) |
+| **Data ingestion** | requests + tenacity (retry/backoff) |
+| **DB access** | psycopg2-binary (raw SQL, no ORM) |
+| **Models** | dataclasses + Decimal (money safety) |
+| **Logging** | structlog (structured JSON-ready) |
+| **Dashboard** | Streamlit + Plotly Express |
+| **Alerting** | Custom evaluator + Telegram Bot API |
+| **Scheduling** | APScheduler (BlockingScheduler) |
+| **Containers** | Docker + docker-compose (3 services) |
+| **Testing** | pytest + pytest-mock |
+
 
 ## Quickstart
 
-(coming when Docker setup is done)
+```bash
+# 1. Clone
+git clone https://github.com/freudianlover/nbptracker.git
+cd nbptracker
 
-## API exploration
+# 2. Configure
+cp .env.example .env
+# Edit .env — set POSTGRES_PASSWORD, optionally TELEGRAM_BOT_TOKEN + CHAT_ID
 
-##NBP API requests are documented as a Postman collection in 
-[`HERE`](docs/exchange_rates_nbp.postman_collection.json). 
-Import into Postman to explore endpoints and sample responses.
+# 3. Run
+make up
+
+# Dashboard at http://localhost:8501
+```
+
+
+## Project structure
